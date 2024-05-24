@@ -73,15 +73,17 @@ paths:
           $ref: '#/components/responses/ServerError'
 
     put:
-      summary: "Обновить информацию о пользователе по ID"
+      summary: Обновить информацию о пользователе по ID
       operationId: usersIdPUT
+      servers:
+        - url: http://158.160.86.46/api/dev
       tags:
         - users
       parameters:
         - name: id
+          description: Уникальный идентификатор пользователя
           in: path
           required: true
-          description: Уникальный идентификатор пользователя!
           schema:
             type: integer
       requestBody:
@@ -137,7 +139,6 @@ components:
         - firstName
         - lastName
         - city
-        - age
       properties:
         id:
           type: integer
@@ -145,16 +146,26 @@ components:
           description: Уникальный идентификатор пользователя
         username:
           type: string
+          description: Логин пользователя в системе
+          maxLength: 35
         email:
           type: string
+          description: Адрес электронной почты
         firstName:
           type: string
+          description: Имя
+          maxLength: 20
         lastName:
           type: string
+          description: Фамилия
+          maxLength: 20
         city:
           type: string
+          description: Город проживания
         age:
           type: integer
+          description: Возраст
+          minimum: 1
       example:
         id: 123
         username: newUser
@@ -172,20 +183,29 @@ components:
         - firstName
         - lastName
         - city
-        - age
       properties:
         username:
           type: string
+          description: Логин пользователя в системе
+          maxLength: 35
         email:
           type: string
+          description: Адрес электронной почты
         firstName:
           type: string
+          description: Имя
+          maxLength: 20
         lastName:
           type: string
+          description: Фамилия
+          maxLength: 20
         city:
           type: string
+          description: Город проживания
         age:
           type: integer
+          description: Возраст
+          minimum: 1
       example:
         username: newUser
         email: user@example.com
@@ -217,7 +237,7 @@ components:
               $ref: '#/components/schemas/user'
 
     Success:
-      description: ""
+      description: Данные успешно получены
       content:
         application/json:
           schema:
